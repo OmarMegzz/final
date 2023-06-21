@@ -1,11 +1,10 @@
-import React from 'react'
-import styles from './Notfound.module.css';
-
+import React from "react";
+import styles from "./NotFound.module.css";
 
 export default function Notfound() {
-  return<>
-  
-  <h2>Notfound</h2>
-  
-  </>
+  return (
+    <>
+      <h2>Notfound</h2>
+    </>
+  );
 }
