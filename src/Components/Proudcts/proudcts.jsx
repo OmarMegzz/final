@@ -1,7 +1,10 @@
-import React from "react";
-import styles from "./proudcts.module.css";
-import Navbar from "../Navbar/Navbar";
+import React, { useContext } from "react";
+import styles from "./Proudcts.module.css";
 
-export default function Layout() {
-  return <></>;
+export default function Proudcts() {
+  return (
+    <>
+      <h2>Proudcts couunter:</h2>
+    </>
+  );
 }

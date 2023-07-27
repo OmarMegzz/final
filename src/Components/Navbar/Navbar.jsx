@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./Navbar.module.css";
 import logo from "../../assets/images/freshcart-logo.svg";
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar({ userData }) {
+  function handleLogout() {
+    localStorage.removeItem("userToken");
+  }
+
   return (
     <>
       <nav className="navbar navbar-expand-sm navbar-light bg-light">
@@ -21,33 +25,35 @@ export default function Navbar() {
             aria-label="Toggle navigation"
           ></button>
           <div className="collapse navbar-collapse" id="collapsibleNavId">
-            <ul className="navbar-nav me-auto mt-2 mt-lg-0">
-              <li className="nav-item">
-                <Link className="nav-link" to="home">
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="cart">
-                  Cart
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="proucts">
-                  Proudcts
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="categories">
-                  Categories
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="brands">
-                  Brands
-                </Link>
-              </li>
-            </ul>
+            {userData !== null ? (
+              <ul className="navbar-nav me-auto mt-2 mt-lg-0">
+                <li className="nav-item">
+                  <Link className="nav-link" to="/">
+                    Home
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="cart">
+                    Cart
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="Proudcts">
+                    Proudcts
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="categories">
+                    Categories
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="brands">
+                    Brands
+                  </Link>
+                </li>
+              </ul>
+            ) : null}
 
             <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
               <li className="nav-item d-flex align-items-center">
@@ -58,19 +64,26 @@ export default function Navbar() {
                 <i className="fab mx-2 fa-linkedin"></i>
                 <i className="fab mx-2 fa-youtube"></i>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="login">
-                  Login
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="register">
-                  Register
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link">Logout</Link>
-              </li>
+              {userData === null ? (
+                <>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="login">
+                      Login
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="register">
+                      Register
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <li className="nav-item">
+                  <Link className="nav-link" onClick={handleLogout} to="login">
+                    Logout
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         </div>
